@@ -309,10 +309,8 @@ def home(request):
         return HttpResponse("Welcome")
 
 def setting_cookie(request):
-        #response = HttpResponse('Cookie {"name":"zapatos","qty":7} creado con éxito')
-        #response.set_cookie("comprar" ,{"name":"zapatos","qty":2})
-
-        #return response
+        #ya el html tiene los scripts necesarios para
+        #crear la cookie
         return render(request, "getcookie.html")
 
 def getting_cookie(request):
@@ -322,7 +320,7 @@ def getting_cookie(request):
         d = json.loads(first_test)
         print(d)
         #'{"3":{"quantity":2},"1":{"quantity":1},"2":{"quantity":1}}
-        print("Este es la id: ", d.keys())
+        print("Este es las id: ", d.keys())
         print("Item ", d.items())
 
         print("Este for imprime cada key y qty de d.items()")
@@ -331,38 +329,9 @@ def getting_cookie(request):
                 product.quantity = product.quantity-d[key]["quantity"]
                 product.save() 
                 
-                print(product, " --> ", product.quantity)
-                #print("key: ",key,"quantity: ",qty["quantity"])
+                print(product)
+               
        
-        
-        # for key,value in d.items():
-        #         if key == "1":
-        #                 print("valor: ",key,"quantity: ",value["quantity"])
-
-        #print("Esta es la cantidad: ",d["1"]["quantity"])
-        #tomo el producto que se llama gorra
-
-        # comprar_json = serializers.serialize("json", Comprar.objects.all())
-        # data = {"comprar_json": comprar_json}
-
-        #print("key: ", key)
-        #print("quantity: ", d[key]["quantity"])
-        
-        #product = Comprar.objects.get(id=key)
-        #product.quantity = product.quantity-d[key]["quantity"]
-        #si lo hace pero no hiciste .save()
-        
-        #print("cantidad de  product.quantity: ", product.quantity)
-        #Tomo el cookie que se llama compra  
-        #dfObj= pd.DataFrame(list(Comprar.objects.all().values()))
-        #print("DataFrame Object:\n ", dfObj)
-
-        #dfJson = pd.DataFrame.from_dict(d, orient='columns')
-        #print("DataFrame Json: ")
-        #print(dfJson["1"])
-        #product.quantity = product.quantity-d["qty"]
-        #product.save()  
-        #print(product.quantity)
         return render(request, "getcookie.html")
 
 

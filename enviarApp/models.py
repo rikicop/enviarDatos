@@ -16,4 +16,6 @@ class Comprar(models.Model):
     
 
     def __str__(self):
-        return str(self.name)
+        return '{} {} {}'.format(self.name, self.department,self.quantity)
+    
+
