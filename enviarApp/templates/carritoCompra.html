@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+{% include 'header.html' %}
+<title>Carrito de Compra </title>
+<style>
+table {border-collapse: collapse;width: 80%;}
+th, td {padding: 4px;text-align: left;border-bottom: 1px solid #ddd;}
+.floatLeft { width: 80%; float: left; }
+.floatRight {width: 20%; float: right;overflow:auto; margin-top:10px;}
+.container { overflow: hidden; }
+input[type=checkbox]{
+padding:4px;
+width:5%;
+border:3px solid #ddd;
+box-shadow:0 0 2px;
+margin-bottom:10px
+}
+</style>
+</head>
+<body>
+<section>
+<h1>Carrito de Compra</h1>
+<br>
+  <div class="contenedor">
+    <div class="floatLeft">
+    <strong>{{ carrito | safe }}</strong>
+    </div>
+  </div>
+<br>
+<br>
+<br>
+<div class="contenedor2">
+  <form   action="agregarCompra" method="POST">
+      {% csrf_token %}
+      <div>
+      <br>
+      <input type="number" name="cantidad" min="0"/>
+      <label for="cantidad">Cantidad</label>
+      </div>
+      <br>
+      <input type="submit" value="Agrega a lista de Compra"/>
+  </form>
+</div>
+</section>
+</body>
+</html>

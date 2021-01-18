@@ -1,0 +1,17 @@
+<html>
+<head><title>Mostrar Datos</title>
+</head>
+<body>
+
+<p><strong>{{ daticos | safe }}</strong></p>
+
+</body>
+
+</html>
+
+
+def mostrar_datos(request):
+     df=pd.DataFrame(list(Post.objects.all().values()))
+     daticos=df.to_html()
+
+    return render(request, "mostrar_datos.html" , {"daticos":df.to_html()})

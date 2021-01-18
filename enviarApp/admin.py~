@@ -1,0 +1,5 @@
+from django.contrib import admin
+from enviarApp.models import Post,Anpost
+
+admin.site.register(Post)
+admin.site.register(Anpost)

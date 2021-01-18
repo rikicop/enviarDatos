@@ -1,0 +1,103 @@
+<html>
+<head>
+{% include 'header.html' %}
+{% load static %}
+<title>Catalogo </title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'js/rating.js' %}"></script>
+
+<style>
+.floatedTable {float:left;table-layout: fixed ;}
+.agregar{background: url("{% static 'images/cart-24.png' %}");
+  background-size:contain; background-repeat:no-repeat; color: transparent;
+  cursor: pointer; width: 18.291px ; height: 18.291px ; border: none; }
+  .checked {color: orange;}
+  .fa-star-half-o{color: orange;}
+  .fa-star-o{color: orange;}
+  .myleft{
+    margin-left: 20px;
+  }
+</style>
+</head>
+  <body>
+    <div class="myleft">
+
+
+      <section>
+      <h1>Catalogo</h1>
+        <form action="carritoCompra" method="POST">
+            {% csrf_token %}
+        <div class="the_margin">
+          <p id="container"></p>
+          <p id="after_me"></p>
+        </div>
+
+        </form>
+      <br>
+      </section>
+      </div>
+  </body>
+<script>
+var arr_str = "{{arreglo}}";
+//.split lo va a convertir en lista
+var arr_js = arr_str.split(',');
+
+var n="{{json_records}}"
+var OutQuotes= n.replace(/(&quot\;)/g,"\"")
+console.log('QutQ', OutQuotes)
+var art = JSON.parse(OutQuotes);
+console.log('art',art)
+var j=1;
+  for (var i = 0; i < art.length; i++) {
+      //Imagen
+      var pict = document.createElement('img');
+      pict.setAttribute('src', art[i].pict);
+      pict.setAttribute('width','40')
+      pict.setAttribute('height','40')
+
+      //Botón de Compra
+      var btn = document.createElement('button');
+      btn.setAttribute('type', 'submit');
+      btn.setAttribute('id',  i);
+      btn.setAttribute('value', i);
+      btn.setAttribute('class', 'agregar');
+      btn.setAttribute('name', 'products[]');
+
+      //Nombre
+      var lblInfo = document.createElement('label');
+      lblInfo.setAttribute('for', 'prodName' + i);
+      var infoString = art[i].info.replace(/^\w/, (c) => c.toUpperCase());
+      lblInfo.appendChild(document.createTextNode(infoString));
+
+      //Breakes
+      var brInfo = document.createElement("br");
+      var brPict = document.createElement("br");
+      var brCarrito = document.createElement("br");
+      var brkRating = document.createElement('br');
+      var brkButton = document.createElement('br');
+
+      //Renderizado
+      container.appendChild(pict);
+      container.appendChild(brPict);
+      container.appendChild(lblInfo);
+      container.appendChild(brInfo);
+      //Rating(Estrellas)
+      theRating(art[i].aprovacion);
+	    container.appendChild(brkRating);
+
+      //Espacio antes del botón
+      //container.appendChild(el);
+      document.getElementById("container").insertAdjacentHTML("beforeend","    ");
+      //Boton de compra
+      container.appendChild(btn);
+      container.appendChild(brkButton);
+      container.appendChild(brCarrito);
+
+      j++
+  }
+
+  </script>
+</html>

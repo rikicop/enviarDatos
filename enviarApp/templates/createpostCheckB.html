@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+{% load static %}
+<title>Create a Post </title>
+<style>
+table {
+  border-collapse: collapse;
+  width: 30%;
+
+}
+th, td {
+  padding: 4px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.float {width: 60%; float: left;}
+
+.eliminar {
+  background: url("{% static 'images/delete-24.ico' %}");
+  background-size:contain;
+  background-repeat:no-repeat;
+  color: transparent;
+  cursor: pointer;
+  width: 18.291px ;
+  height: 18.291px ;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<h1>Create a Post </h1>
+<form   action="createpostCheckB" method="POST">
+{% csrf_token %}
+Title: <input type="text" name="title"/><br/><br/>
+Content: <br><br>
+<input type="checkbox" id="content" name="content" value="Perro">
+<label for="vehicle1"> I have a bike</label><br><br>
+<input type="submit" value="Ingresar"/>
+</form>
+<h1>Borrar del CHECKBOX </h1>
+
+<form action="deletepostCheckB" method="POST">
+{% csrf_token %}
+
+  <table id="myTable"></table>
+
+
+  <div class="float">
+      <p id="container"></p>
+  </div>
+
+</form>
+
+<br>
+</body>
+<script>
+  var arr="{{arreglo}}"
+  var arr_js = arr.split(',');
+  console.log(arr_js[3])
+	var limite = {{longitud}};
+
+  j=1
+  for (var i = 0; i < limite; i++) {
+  var table = document.getElementById("myTable");
+
+  var chk = document.createElement('input');
+  chk.setAttribute('type', 'submit');
+  chk.setAttribute('class', 'eliminar');
+  chk.setAttribute('id',  i);
+  chk.setAttribute('value', i);
+  chk.setAttribute('name', 'products[]');
+
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  cell1.innerHTML = arr_js[i] ;
+  cell2.appendChild(chk)
+
+ }
+
+</script>
+</html>

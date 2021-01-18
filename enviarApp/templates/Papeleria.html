@@ -1,0 +1,129 @@
+<html>
+  <head>
+  {% load static %}
+  <title>Papeleria</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  </head>
+    <body>
+      <h1>Hola Soy la papeleria</h1>
+
+      <h1> Para obtener un departamento en particular...</h1>
+      <input type="checkbox" id="papeleria" value="I am Agree!"> Papeleria
+
+      <form>
+        <h2>Buscador: </h2>
+        <input type="text" id="buscador" name="buscador" placeholder="Buscador RikoCA" size="18" onfocus="this.value=''"/><br>
+         <!--<a href = "{% url 'Papeleria' %}">
+            <img alt="angeles" src="{% static 'images/la.jpg' %}" width="50" height="60">
+         </a>-->
+        <p id="contenedor"></p>
+        <div id="myList"></div>
+      </form>
+<script>
+
+var n="{{json1}}"
+var OutQuotes= n.replace(/(&quot\;)/g,"\"")
+console.log('QutQ', OutQuotes)
+var art = JSON.parse(OutQuotes);
+console.log('art',art)
+var j=1
+
+var clasif = art.filter(item => item.depart === 'higiene');
+console.log('clasif: ', clasif)
+
+const arre = clasif.map(item => item.name)
+console.log('Esto es de un array', arre)
+
+document.getElementById('papeleria').onclick = function() {
+
+   if ( this.checked ) {
+
+         for(var i=0; i < clasif.length; i++){
+
+           //Breakes
+           var brk0 = document.createElement('br');
+           var brk1 = document.createElement('br');
+           var brk2 = document.createElement('br');
+           //Imagen
+           var pict = document.createElement('img');
+           pict.setAttribute('src',clasif[i].pict);
+           pict.setAttribute('width','40')
+           pict.setAttribute('height','40')
+           //Nombre
+           var lblName = document.createElement('label');
+           var myString = clasif[i].name.replace(/^\w/, (c) => c.toUpperCase());
+           lblName.appendChild(document.createTextNode(myString));
+           //Info
+           var lblInfo = document.createElement('label');
+           lblInfo.setAttribute('id', 'lblinfo'+ i);
+           lblInfo.appendChild(document.createTextNode(clasif[i].info));
+           //Precio
+           var lblPrecio = document.createElement('label');
+           lblPrecio.setAttribute('id', 'lblprecio'+ i);
+           lblPrecio.appendChild(document.createTextNode(clasif[i].valor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")));
+           //Renderizacion
+           contenedor.appendChild(pict);
+           contenedor.appendChild(brk0);
+           contenedor.appendChild(lblInfo);
+           document.getElementById('lblinfo'+ i).style.color = "green";
+           contenedor.appendChild(brk1);
+           contenedor.appendChild(lblPrecio);
+           contenedor.appendChild(brk2);
+           j++
+
+       }
+
+       }
+   else {
+                 // Returns false if not checked
+        }
+   };
+
+
+//Este tambien lo hace para solo Papeleria
+//Pero sin usar map y checkbox
+//   for(var i=0; i < art.length; i++){
+//           if (art[i].depart==="papeleria") {
+//           //Breakes
+//           var brk0 = document.createElement('br');
+//           var brk1 = document.createElement('br');
+//           var brk2 = document.createElement('br');
+//           //Imagen
+//           var pict = document.createElement('img');
+//           pict.setAttribute('src',art[i].pict);
+//           pict.setAttribute('width','40')
+//           pict.setAttribute('height','40')
+//           //Nombre
+//           var lblName = document.createElement('label');
+//           var myString = art[i].name.replace(/^\w/, (c) => c.toUpperCase());
+//           lblName.appendChild(document.createTextNode(myString));
+//           //Info
+//           var lblInfo = document.createElement('label');
+//           lblInfo.setAttribute('id', 'lblinfo'+ i);
+//           lblInfo.appendChild(document.createTextNode(art[i].info));
+//           //Precio
+//           var lblPrecio = document.createElement('label');
+//           lblPrecio.setAttribute('id', 'lblprecio'+ i);
+//           lblPrecio.appendChild(document.createTextNode(art[i].valor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")));
+//           //Renderizacion
+//           contenedor.appendChild(pict);
+//           contenedor.appendChild(brk0);
+//           contenedor.appendChild(lblInfo);
+//           document.getElementById('lblinfo'+ i).style.color = "green";
+//           contenedor.appendChild(brk1);
+//           contenedor.appendChild(lblPrecio);
+//           contenedor.appendChild(brk2);
+//           j++
+//    }
+// }
+
+
+</script>
+</body>
+</html>

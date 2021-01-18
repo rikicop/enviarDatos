@@ -1,0 +1,136 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Create a Post </title>
+<style>
+table {
+  border-collapse: collapse;
+  width: 80%;
+
+}
+th, td {
+  padding: 4px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.floatLeft { width: 80%; float: left; }
+.floatRight {width: 20%; float: right;
+             overflow:auto; margin-top:10px;
+            }
+.container { overflow: hidden; }
+
+input[type=checkbox]{
+padding:4px;
+width:5%;
+border:3px solid #ddd;
+box-shadow:0 0 2px;
+margin-bottom:10px
+}
+.agregar{
+  background-image: url(
+'https://media.istockphoto.com/vectors/shopping-cart-icon-vector-id468726396?s=170x170');
+            background-size: cover;
+            width: 25px;
+            height: 20px;
+            font-size: 5rem;
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<h1>Create a Post </h1>
+<form   action="createpostButton" method="POST">
+{% csrf_token %}
+Title: <input type="text" name="title"/><br/><br/>
+Content: <br><br>
+<input type="checkbox" id="content" name="content" value="Perro">
+<label for="vehicle1"> I have a bike</label><br><br>
+<input type="submit" value="Ingresar"/>
+</form>
+
+<h1>Borrar del Button </h1>
+<form action="carritoCompra" method="POST">
+{% csrf_token %}
+<!--Title: <input type="checkbox" name="titled" value="rocio"/><br/>-->
+<h3>Este botón te dará la opción de eliminar de un cuadro
+    (mediante un drop) elementos de un df y pasar el eliminado
+    a otro df(carrito), utilizando df.iloc[lista].
+</h3>
+<input type="button" id="bt" value="Eliminar con Button" onclick="createbtn()" />
+
+<div class="contenedor">
+<div class="floatLeft">
+<strong>{{ daticos | safe }}</strong>
+</div>
+<div class="floatRight">
+<p id="container"></p>
+</div>
+</div>
+
+<input type="submit" value="Eliminar"/>
+</form>
+
+<br><br>
+<div class="contenedor">
+<div class="floatLeft">
+<h2>{{str_carrito}}</h2>
+<br>
+<strong>{{ carrito | safe }}</strong>
+<p id="container2"></p>
+</div>
+</div>
+
+</body>
+
+<script>
+    function createbtn() {
+    	var limite = {{longitud}};
+        for (var i = 0; i < limite; i++) {
+            var btn = document.createElement('button');
+            btn.setAttribute('type', 'submit');
+            btn.setAttribute('id',  i);
+            btn.setAttribute('value', i);
+            btn.setAttribute('class', 'agregar');
+            btn.setAttribute('name', 'products[]');
+
+            var lbl = document.createElement('label');
+            lbl.setAttribute('for', 'prodName' + i);
+            lbl.appendChild(document.createTextNode('prodName' + i));
+
+            var br = document.createElement("br");
+            container.appendChild(btn);
+            container.appendChild(lbl);
+            container.appendChild(br);
+        }
+    }
+    /*function createinp() {
+    	var limite = {{longitud}};
+        for (var i = 0; i < limite; i++) {
+            var btn = document.createElement('button');
+            btn.setAttribute('type', 'submit');
+            btn.setAttribute('id',  i);
+            btn.setAttribute('value', i);
+            btn.setAttribute('class', 'agregar');
+            btn.setAttribute('name', 'products[]');
+
+            var lbl = document.createElement('label');
+            lbl.setAttribute('for', 'prodName' + i);
+            lbl.appendChild(document.createTextNode('prodName' + i));
+
+            var br = document.createElement("br");
+            container.appendChild(btn);
+            container.appendChild(lbl);
+            container.appendChild(br);
+
+
+        }
+    }*/
+</script>
+</html>
