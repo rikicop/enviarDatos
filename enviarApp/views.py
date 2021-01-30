@@ -334,4 +334,7 @@ def getting_cookie(request):
        
         return render(request, "getcookie.html")
 
+def slider(request):
+        return render(request, 'slider.html',{})
+
 
