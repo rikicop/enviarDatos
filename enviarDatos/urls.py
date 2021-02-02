@@ -24,6 +24,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('setc', views.setting_cookie, name='setc'),
     path('getc', views.getting_cookie, name='getc'),
-     path('slider', views.slider, name='slider')
+    path('slider', views.slider, name='slider')
 
 ]

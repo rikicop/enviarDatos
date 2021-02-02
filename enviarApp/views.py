@@ -309,8 +309,8 @@ def home(request):
         return HttpResponse("Welcome")
 
 def setting_cookie(request):
-        #ya el html tiene los scripts necesarios para
-        #crear la cookie
+        #ya el archivo html(getcookie.hmtl) tiene los scripts 
+        #necesarios para crear la cookie
         return render(request, "getcookie.html")
 
 def getting_cookie(request):
@@ -320,6 +320,7 @@ def getting_cookie(request):
         d = json.loads(first_test)
         print(d)
         #'{"3":{"quantity":2},"1":{"quantity":1},"2":{"quantity":1}}
+        # Con pgadmin puedes ver el key
         print("Este es las id: ", d.keys())
         print("Item ", d.items())
 
@@ -333,6 +334,8 @@ def getting_cookie(request):
                
        
         return render(request, "getcookie.html")
+
+
 
 def slider(request):
         return render(request, 'slider.html',{})
